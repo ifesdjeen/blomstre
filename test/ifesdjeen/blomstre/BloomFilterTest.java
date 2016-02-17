@@ -128,45 +128,4 @@ public class BloomFilterTest {
 
   }
 
-
-
-
-  @Test
-  public void nonConcurrentBloomFilterTest() throws InterruptedException {
-    final NonConcurrentBloomFilter<Integer> filter = NonConcurrentBloomFilter.makeFilter(Converters.intToByteBufferConverter, 6000, 0.01);
-
-    final int threads = 40;
-    final CountDownLatch latch = new CountDownLatch(threads);
-    final CountDownLatch finishedLatch = new CountDownLatch(threads);
-
-    for(int thread = 0; thread < threads; thread++) {
-      final int finalThread = thread;
-      new Thread(new Runnable() {
-        @Override
-        public void run() {
-          final int localFinalThread = finalThread;
-          latch.countDown();
-          try {
-            latch.await();
-            // Thread.sleep(1000);
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-          for (int i = 0; i < 100; i++) {
-            final int finalI = localFinalThread * 25 + i;
-            filter.add(finalI);
-          }
-          finishedLatch.countDown();
-        }
-      }).start();
-    }
-
-    finishedLatch.await();
-
-    for(int i = 0; i < 1000; i++) {
-      assertTrue(filter.isPresent(i));
-    }
-
-
-  }
 }

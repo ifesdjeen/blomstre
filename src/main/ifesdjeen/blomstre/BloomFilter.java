@@ -1,8 +1,9 @@
 package ifesdjeen.blomstre;
 
 /*
- * !!! WARNING: THIS SOURCE FILE WAS TAKEN FROM APACHE CASSANDRA SOURCE !!!
+ * !!! WARNING: THIS SOURCE FILE WAS ORIGINALLY TAKEN FROM APACHE CASSANDRA SOURCE !!!
  * !!! AUTHOR OF THE LIBRARY IS NOT AN ORIGINAL AUTHOR OF THIS FILE !!!
+ * !!! REQUIRED ADJUSTMENTS WERE MAKE TO MAKE IT WORK FOR MORE GENERAL CASES !!!
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -21,9 +22,6 @@ package ifesdjeen.blomstre;
  * limitations under the License.
  */
 
-import ifesdjeen.blomstre.nonconcurrent.OpenBitSet;
-
-import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.util.function.Function;
 
@@ -32,14 +30,12 @@ public class BloomFilter<T> {
 
   private final Function<T, ByteBuffer> converter;
   public final  ConcurrentBitSet        bitset;
-  // public final  OpenBitSet        bitset;
   public final  int                     hashCount;
 
   BloomFilter(Function<T, ByteBuffer> converter,
               int hashes,
               ConcurrentBitSet bitset
-              //OpenBitSet bitset
-              ) {
+             ) {
     this.converter = converter;
     this.hashCount = hashes;
     this.bitset = bitset;
@@ -62,8 +58,8 @@ public class BloomFilter<T> {
   long[] getHashBuckets(ByteBuffer b,
                         int hashCount,
                         long max) {
-    long[] result = new long[hashCount];
-    long[] hash = this.hash(b, 0L);
+    final long[] result = new long[hashCount];
+    final long[] hash = this.hash(b, 0L);
     for (int i = 0; i < hashCount; ++i) {
       result[i] = Math.abs((hash[0] + (long) i * hash[1]) % max);
     }
@@ -106,6 +102,5 @@ public class BloomFilter<T> {
 
     long numBits = (numElements * spec.bucketsPerElement) + BITSET_EXCESS;
     return new BloomFilter<T>(converter, spec.K, new ConcurrentBitSet(numBits));
-    // return new BloomFilter<T>(converter, spec.K, new OpenBitSet(numBits));
   }
 }
