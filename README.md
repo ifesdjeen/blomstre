@@ -33,6 +33,22 @@ To include dependency, just use:
 </dependency>
 ```
 
+# Usage
+
+```java
+import com.ifesdjeen.blomstre.BloomFilter;
+
+// Make a filter that'd accept Strings, give a converter to byte buffer for hash function calculation
+// Maximum number of elements is 6000, max acceptable false positive probability is 0.0001
+BloomFilter<String> filter = BloomFilter.makeFilter(Converters.stringToByteBufferConverter, 6000, 0.0001);
+
+// Add an item to the filter
+filter.add("abcdef");
+
+filter.isPresent("abcdef");
+// => "probably" true
+```
+
 # Copyright / License
 
 Licensed under Apache 2.0 License.
