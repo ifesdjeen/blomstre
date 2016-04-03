@@ -16,12 +16,7 @@ Hash collisions / intersections result into the false positives: if hash functio
 values, there's no way to distinguish which exactly value was meant. Given enough collisions all bits will
 be set and all queries will return "probably in the set", so make sure you create a sufficiently large set.
 
-Thread safety is achieved through using the concurrent `BitSet`, which is backed by `AtomicLongArray`.
-
-
 You can find a very good, illustrative description of the Bloom Filter [here](https://www.jasondavies.com/bloomfilter/).
-The only addition / change made by this library is that the concurrent / atomic / thread-safe
-bitset implementation is used by default, which might be useful in some cases.
 
 To include dependency, just use:
 
@@ -48,6 +43,12 @@ filter.add("abcdef");
 filter.isPresent("abcdef");
 // => "probably" true
 ```
+
+# Thread Safety
+
+Thread safety is achieved through using the concurrent `BitSet`, which is backed by `AtomicLongArray`. That
+means that write operations may sometimes retry, although will never affect reads or interfere with
+other writes in an unpredictable way.
 
 # Copyright / License
 
