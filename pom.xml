@@ -19,6 +19,10 @@
 
   <properties>
     <javac.target>1.8</javac.target>
+    <snapshotsRepositoryId>ossrh</snapshotsRepositoryId>
+    <snapshotsRepositoryUrl>https://oss.sonatype.org/content/repositories/snapshots</snapshotsRepositoryUrl>
+    <snapshotsRepositoryId>ossrh</snapshotsRepositoryId>
+    <releasesRepositoryUrl>https://oss.sonatype.org/content/repositories/releases</releasesRepositoryUrl>
   </properties>
 
   <build>
@@ -68,13 +72,14 @@
   </build>
 
   <distributionManagement>
+
     <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+      <id>${snapshotsRepositoryId}</id>
+      <url>${snapshotsRepositoryUrl}</url>
     </snapshotRepository>
     <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>${releasesRepositoryId}</id>
+      <url>${releasesRepositoryUrl}</url>
     </repository>
   </distributionManagement>
 
@@ -99,4 +104,22 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+   <profiles>
+    <profile>
+      <id>clojars</id>
+      <activation>
+        <property>
+          <name>env</name>
+          <value>clojars</value>
+        </property>
+      </activation>
+      <properties>
+        <snapshotRepositoryId>clojars</snapshotRepositoryId>
+        <snapshotRepositoryUrl>https://clojars.org/repo</snapshotRepositoryUrl>
+        <releasesRepositoryId>clojars</releasesRepositoryId>
+        <releasesRepositoryUrl>https://clojars.org/repo</releasesRepositoryUrl>
+      </properties>
+    </profile>
+   </profiles>
 </project>
