@@ -1,4 +1,4 @@
-package ifesdjeen.blomstre;
+package com.ifesdjeen.blomstre;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLongArray;

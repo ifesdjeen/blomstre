@@ -1,4 +1,4 @@
-package ifesdjeen.blomstre;
+package com.ifesdjeen.blomstre;
 
 import org.junit.Test;
 

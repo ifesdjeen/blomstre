@@ -1,9 +1,7 @@
-package ifesdjeen.blomstre;
+package com.ifesdjeen.blomstre;
 
 /*
- * !!! WARNING: THIS SOURCE FILE WAS ORIGINALLY TAKEN FROM APACHE CASSANDRA SOURCE !!!
- * !!! AUTHOR OF THE LIBRARY IS NOT AN ORIGINAL AUTHOR OF THIS FILE !!!
- * !!! REQUIRED ADJUSTMENTS WERE MAKE TO MAKE IT WORK FOR MORE GENERAL CASES !!!
+ * !!! THIS SOURCE FILE WAS ORIGINALLY TAKEN FROM APACHE CASSANDRA SOURCE !!!
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
