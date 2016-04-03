@@ -18,15 +18,17 @@ be set and all queries will return "probably in the set", so make sure you creat
 
 You can find a very good, illustrative description of the Bloom Filter [here](https://www.jasondavies.com/bloomfilter/).
 
-To include dependency, just use:
+To include dependency, just use from Maven Central:
 
 ```xml
 <dependency>
   <groupId>com.github.ifesdjeen</groupId>
   <artifactId>blomstre</artifactId>
-  <version>0.1.0</version>
+  <version>1.0.0-RC1</version>
 </dependency>
 ```
+
+You can also find it on [clojars](https://clojars.org/com.github.ifesdjeen/blomstre).
 
 # Usage
 
